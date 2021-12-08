@@ -24,6 +24,10 @@ li a {
   color: #a7c957;
   text-shadow: 2px 2px black;
 }
+li a:hover {
+  text-shadow: 4px 4px 6px rgba(0,0,0,1);
+  color: #a68a64;
+}
 header {
   display: flex;
 }
@@ -48,6 +52,8 @@ nav {
 }
 main {
   margin-left: 150px;
+  height: 100vh;
+  background-color: #d9ed92;
 }
 .forms {
   display: flex;
@@ -109,9 +115,12 @@ article {
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 300px;
+  padding: 30px;
+
 }
 #articles li {
   margin: 40px 20px;
+  display: flex;
 }
 #logo {
   display: block;
@@ -121,4 +130,23 @@ article {
   margin-right: auto;
   background-color: #a68a64;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.4);
+  transition: 0.3s;
+  background-color: beige;
+  border: 1px black solid;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 12px 16px;
+  text-align: center;
 }
