@@ -3,23 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Login or Sign Up</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+      rel="stylesheet"
+    />
     <style></style>
   </head>
 
   <body>
     <header>
       <nav>
-        <img id="logo" src="/media/leaf-logo.png" />
+        <a href="front.html">
+          <img id="logo" src="/media/leaf-logo.png" />
+        </a>
         <ul>
-          <li><a href="front.html">Home</a></li>
           <li><a href="">Profile</a></li>
           <li><a href="">Search</a></li>
           <li><a href="">Random</a></li>
-          <li><a href="">History</a></li>
+          <li><a href="liked-photos.html">Liked Photos</a></li>
           <li><a href="add-photo.html">Add Photo</a></li>
-          <li><a href="login.html">Register</a></li>
+          <li><a href="login.html">Login/Sign Up</a></li>
+          <li><a href="logout.html">Logout</a></li>
         </ul>
       </nav>
     </header>
@@ -29,7 +37,8 @@
       </section>
       <div class="forms">
         <div class="form-wrapper" id="loginSide">
-          <h3>Already have an account? Login</h3>
+          <h3>Already have an account?</h3>
+          <h3>Login</h3>
           <form
             id="login-form"
             class="light-border"
@@ -37,20 +46,12 @@
             method="post"
           >
             <div>
-              <input
-                placeholder="Email"
-                class="light-border"
-                type="text"
-                name="username"
-              />
+              <label>Email:</label>
+              <input class="light-border" type="text" name="username" />
             </div>
             <div>
-              <input
-                placeholder="Password"
-                class="light-border"
-                type="password"
-                name="password"
-              />
+              <label>Password:</label>
+              <input class="light-border" type="password" name="password" />
             </div>
             <div>
               <button class="light-border" type="submit">Log In</button>
@@ -63,6 +64,7 @@
 
         <div class="form-wrapper" id="registerSide">
           <h3>Create a new account</h3>
+          <h3>Add user</h3>
           <form
             validate
             action="http://localhost:3000/user"
@@ -82,7 +84,7 @@
               class="light-border"
               type="text"
               name="email"
-              placeholder="email"
+              placeholder="Email"
               required
             />
             <input
@@ -93,7 +95,7 @@
               required
               pattern="(?=.*[A-Z]).{8,}"
             />
-            <button class="light-border" type="submit">Sign Up</button>
+            <button class="light-border" type="submit">Save</button>
           </form>
         </div>
       </div>
@@ -101,6 +103,9 @@
     <!--
     <script src="./js/serialize.js"></script>
     <script src="./js/login.js"></script>
+    
+    
+    
     -->
   </body>
 </html>
