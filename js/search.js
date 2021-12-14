@@ -2,10 +2,33 @@
 
 const url = 'https://10.114.34.24/app';
 
+const getQParam = (param) => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param);
+};
+
+const searchQuery = getQParam('query');
+
+
+const searchFrom = document.querySelector('#search-form');
 const ul = document.querySelector('#articles');
-
-const user = JSON.parse(sessionStorage.getItem('user'));
-
+let searchParam = '';
+searchFrom.addEventListener('submit', async(evt) => {
+    ul.innerHTML = '';
+    evt.preventDefault();
+    try {
+        
+        const searchq = document.getElementById('search-value').value;
+        searchParam = searchq;
+        getPhoto(searchq);
+        
+                
+    } catch (e) {
+        console.log(e.message);
+    }
+    
+});
 const createCards = (photos) => {
     ul.innerHTML = '';
     photos.forEach((photo) => {
@@ -42,14 +65,13 @@ const createCards = (photos) => {
                 method: 'POST',
                 headers: {
                     Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-                },
-                
+                },                
             };
             try {
                 const response = await fetch(url + '/photo/' + photo.PhotoID, fetchOptions);
                 const json = await response.json();
                 console.log('like response', json);
-                getPhoto();
+                getPhoto(searchParam);
             } catch (e) {
                 console.log(e.message);
             }
@@ -65,62 +87,33 @@ const createCards = (photos) => {
         li.appendChild(p3);
         li.appendChild(likePhoto);
         ul.appendChild(li);
-        
-        if (user.Role === 0 || user.UserID === photo.UserID) {
-            const modButton = document.createElement('a');
-            modButton.innerHTML = 'Modify';
-            modButton.href = `modify-photo.html?id=${photo.PhotoID}`;
-            modButton.classList.add('button');
-
-            const delButton = document.createElement('button');
-            delButton.innerHTML = 'Delete';
-            delButton.classList.add('button');
-            delButton.addEventListener('click', async () => {
-                const fetchOptions = {
-                    method: 'DELETE',
-                    headers: {
-                        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-                    },
-                };
-                try {
-                    const response = await fetch(url + '/photo/' + photo.PhotoID, fetchOptions);
-                    const json = await response.json();
-                    console.log('delete response', json);
-                    getPhoto();
-                } catch (e) {
-                    
-                    console.log(e.message);
-                }
-            });
-
-            
-
-            
-            li.appendChild(modButton);
-            li.appendChild(delButton);
-            }
-
-        
-        
-    })
+    });    
 }
-
-
-
-
-const getPhoto = async () => {
+const getPhoto = async (query) => {
   try {
     const fetchOptions = {
-        headers: {
-        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-        },
-    };
-    const response = await fetch(url + '/photo', fetchOptions);
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            
+        };
+    const response = await fetch(url + '/photo/search/' + query, fetchOptions);
     const photos = await response.json();
-    createCards(photos);
+    if (photos.length > 0) {
+            createCards(photos);
+                       
+        } else {            
+            const p = document.createElement('p');            
+            p.innerHTML = 'No photos found with matching description. Try something else.';
+            ul.appendChild(p);            
+        }
+    
+    
   } catch (e) {
     console.log(e.message);
   }
 };
-
-getPhoto();
+if (searchQuery) {
+    getPhoto(searchQuery);
+}

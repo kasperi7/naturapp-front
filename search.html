@@ -58,23 +58,29 @@
       </nav>
     </header>
     <main>
-      <section id="top">
-        <div></div>
-      </section>
-      <div class="container">
-        <div class="single" id="image">
-          <a href="front.html">Go Back</a>
-          <img src="" alt="" />
-          <div id="map"></div>
+      <div id="likedMain" class="background background-filter">
+        <div id="container">
+          <form
+            id="search-form"
+            class="u-non-blurred forms-norm"
+            action="https://10.114.34.24/app/search/"
+          >
+            <input
+              id="search-value"
+              type="text"
+              placeholder="Search.."
+              name="query"
+            />
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+          <ul id="articles" class="u-non-blurred"></ul>
         </div>
       </div>
     </main>
     <!--
     <script src="js/serialize.js"></script>
     <script src="js/check-login.js"></script>
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
-    <script src="js/mapbox.js"></script>
-    <script src="js/single.js"></script>
+    <script src="js/search.js"></script>
     -->
   </body>
 </html>
