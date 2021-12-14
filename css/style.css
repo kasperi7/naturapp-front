@@ -58,7 +58,7 @@ nav {
   flex: 1;
 }
 #registerSide {
-  background-color: #a68a64;
+  background-color: #936639;
   flex: 1;
 }
 #registerSide form,
@@ -69,6 +69,7 @@ nav {
 main {
   margin-left: 200px;
   height: 100vh;
+  background-color: #d9ed92;
 }
 .forms {
   display: flex;
@@ -198,8 +199,8 @@ form button:active {
   background-color: white;
 }
 #map {
-  width: 100%;
-  height: 30rem;
+  width: 400px;
+  height: 250px;
 }
 .background-filter::after {
   -webkit-backdrop-filter: blur(5px);
@@ -231,4 +232,37 @@ form button:active {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
+}
+#singleMain {
+  background-image: url(../media/nature3.jpg);
+  min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+#image {
+  width: 50%;
+  min-height: 100vh;
+  margin: auto;
+  background-color: #a7c957;
+}
+#goBack {
+  text-decoration: 0;
+  background-color: #a7c957;
+  padding: 10px;
+  font-family: "Staatliches", cursive;
+  letter-spacing: 4px;
+  font-size: 25px;
+  color: #287428;
+  border-radius: 0px 0px 10px 0px;
+  border-bottom: 3px #936639 solid;
+  border-right: 3px #936639 solid;
+  position: fixed;
+}
+#singlePhoto {
+  width: 100%;
+  height: 100%;
+  margin: auto;
 }
