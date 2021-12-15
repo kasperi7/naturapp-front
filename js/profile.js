@@ -68,14 +68,18 @@ const createCards = (photos) => {
       ul.appendChild(li);
 
       if (user.Role === 0 || user.UserID === photo.UserID) {
+        const but = document.createElement("button");
+
         const modButton = document.createElement("a");
-        modButton.innerHTML = "Modify";
+        but.innerHTML = "Modify";
         modButton.href = `modify-photo.html?id=${photo.PhotoID}`;
-        modButton.classList.add("button");
+        but.classList.add("button1");
+        but.setAttribute("id", "mod-button");
 
         const delButton = document.createElement("button");
         delButton.innerHTML = "Delete";
-        delButton.classList.add("button");
+        delButton.classList.add("button1");
+        delButton.setAttribute("id", "del-button");
         delButton.addEventListener("click", async () => {
           const conf =
             "Are you sure you want to delete this picture. This can not be reversed.";
@@ -100,7 +104,7 @@ const createCards = (photos) => {
             console.log("deleted");
           }
         });
-
+        modButton.appendChild(but);
         li.appendChild(modButton);
         li.appendChild(delButton);
       }

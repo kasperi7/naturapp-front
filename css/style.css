@@ -102,6 +102,7 @@ h3 {
   letter-spacing: 10px;
   font-size: 2em;
   text-shadow: 2px 2px 4px black;
+  text-align: center;
 }
 input {
   width: 250px;
@@ -222,11 +223,11 @@ form button:active {
   transform: translateY(2px);
 }
 #map {
-  width: 400px;
-  height: 250px;
+  max-width: 90%;
+  max-height: 35vh;
   margin: auto;
-  margin-top: 10px;
-  border: 1px #936639 solid;
+  margin-top: 2em;
+  height: 30rem;
 }
 .background-filter::after {
   -webkit-backdrop-filter: blur(5px);
@@ -295,6 +296,7 @@ form button:active {
 #image {
   width: 50%;
   min-height: 100vh;
+  padding: 2em;
   margin: auto;
   background-color: #a7c957;
   box-shadow: 0 5px 0px 0px white, 0 -5px 0px 0px white, 6px 0 7px -4px #936639,
@@ -314,7 +316,19 @@ form button:active {
   position: fixed;
 }
 #singlePhoto {
-  width: 100%;
+  max-height: 55vh;
+  max-width: 100%;
   display: block;
   margin: auto;
+  padding: 1em;
+}
+.button1 {
+  font-size: 20px;
+  margin: 0 0.1em;
+  color: black;
+  background-color: #936639;
+  padding: 3px;
+  font-family: "Staatliches", cursive;
+  color: #a7c957;
+  border-radius: 5px;
 }
