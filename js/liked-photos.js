@@ -1,60 +1,83 @@
-"use strict";
+'use strict';
 
-const url = "https://10.114.34.24/app";
+const url = 'https://10.114.34.24/app';
 
-const ul = document.querySelector("#articles");
+const ul = document.querySelector('#articles');
 
-const user = JSON.parse(sessionStorage.getItem("user"));
+const user = JSON.parse(sessionStorage.getItem('user'));
 
 const createCards = (photos) => {
-  ul.innerHTML = "";
-  photos.forEach((photo) => {
-    const img = document.createElement("img");
-    img.src = url + "/thumbnails/" + photo.Filename;
-    img.alt = photo.Description;
-    img.classList.add("resp");
+    ul.innerHTML = '';
+    photos.forEach((photo) => {
+        
+        const img = document.createElement('img');
+        img.src = url + '/thumbnails/' + photo.Filename;
+        img.alt = photo.Description;
+        img.classList.add('resp');
 
-    img.addEventListener("click", () => {
-      location.href = "single.html?id=" + photo.PhotoID;
-    });
+        img.addEventListener('click', () => {
+            location.href = 'single.html?id=' + photo.PhotoID;
+        });
 
-    const figure = document.createElement("figure").appendChild(img);
 
-    const h2 = document.createElement("h2");
-    h2.innerHTML = photo.Description;
+        const figure = document.createElement('figure').appendChild(img);
 
-    const [postedDate] = photo.PostedDate.split("T");
-    const p1 = document.createElement("p");
-    p1.innerHTML = `Posted: ${postedDate}`;
+        const h2 = document.createElement('h2');
+        h2.innerHTML = photo.Description;
 
-    const p2 = document.createElement("p");
-    p2.innerHTML = `Likes: ${photo.LikeCount}`;
+        const [postedDate] = photo.PostedDate.split('T');
+        const p1 = document.createElement('p');
+        p1.innerHTML = `Posted: ${postedDate}`;
 
-    const p3 = document.createElement("p");
-    p3.innerHTML = `By: ${photo.UserName}`;
+        const p2 = document.createElement('p');
+        p2.innerHTML = `Likes: ${photo.LikeCount}`;
 
-    const li = document.createElement("li");
-    li.classList.add("light-border");
+        const p3 = document.createElement('p');
+        p3.innerHTML = `By: ${photo.UserName}`;
 
-    li.appendChild(h2);
-    li.appendChild(figure);
-    li.appendChild(p1);
-    li.appendChild(p2);
-    li.appendChild(p3);
-    ul.appendChild(li);
-  });
-};
+        const deleteLikeButton = document.createElement('button');
+        deleteLikeButton.innerHTML = 'Delete Like';
+
+        deleteLikeButton.addEventListener('click', async () => {
+          const fetchOptions = {
+                method: 'DELETE',
+                headers: {
+                    Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+                },
+                
+            };
+            try {
+                const response = await fetch(url + '/photo/like/' + photo.PhotoID, fetchOptions);
+                const json = await response.json();
+                console.log('delete like response', json);
+                getPhoto();
+            } catch (e) {
+                console.log(e.message);
+            }
+        })
+
+        const li = document.createElement('li');
+        li.classList.add('light-border');
+        
+
+
+        li.appendChild(h2);
+        li.appendChild(figure);
+        li.appendChild(p1);
+        li.appendChild(p2);
+        li.appendChild(p3);
+        li.appendChild(deleteLikeButton);
+        ul.appendChild(li);
+    });    
+}
 const getPhoto = async () => {
   try {
     const fetchOptions = {
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token"),
-      },
+        headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+        },
     };
-    const response = await fetch(
-      url + "/photo/favs/" + user.UserID,
-      fetchOptions
-    );
+    const response = await fetch(url + '/photo/favs/' + user.UserID, fetchOptions);
     const photos = await response.json();
     console.log(photos);
     createCards(photos);
